@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'checkstyle'
 }
 
 group = 'com'
@@ -38,8 +39,20 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:postgresql'
+	testImplementation 'org.junit.jupiter:junit-jupiter'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+checkstyle {
+	toolVersion = '8.44'
+	configFile = file("${rootProject.projectDir}/checkstyle.xml") // Path to your Checkstyle configuration file
+	ignoreFailures = false // Set to true if you want the build to continue even if Checkstyle violations are found
+	showViolations = true // Set to true to display Checkstyle violations in the console
+	sourceSets = [sourceSets.main] // Apply Checkstyle to the main source set
+}
+
