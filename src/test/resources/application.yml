@@ -1,3 +1,13 @@
 spring:
   flyway:
     enabled: false
+
+system-configuration:
+  public-endpoints: /api/auth/**, /swagger-ui/**, /v3/api-docs/**, /error
+
+jwt:
+  expiration-time: 24 # hours
+
+rsa:
+  private-key: classpath:rsa/private.pem
+  public-key: classpath:rsa/public.pem
